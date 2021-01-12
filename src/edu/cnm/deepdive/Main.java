@@ -16,6 +16,10 @@
 package edu.cnm.deepdive;
 
 import edu.cnm.deepdive.processing.DataProcessor;
+import edu.cnm.deepdive.processing.MultiThreadedWithCriticalSection;
+import edu.cnm.deepdive.processing.MultiThreadedWithForkJoin;
+import edu.cnm.deepdive.processing.MultiThreadedWithRaceCondition;
+import edu.cnm.deepdive.processing.MultiThreadedWithReduction;
 import edu.cnm.deepdive.processing.SingleThreaded;
 
 public class Main {
@@ -23,6 +27,14 @@ public class Main {
   public static void main(String[] args) throws InterruptedException {
     DataProcessor processor;
     processor = new SingleThreaded();
+    processor.measureProcess();
+    processor = new MultiThreadedWithRaceCondition();
+    processor.measureProcess();
+    processor = new MultiThreadedWithCriticalSection();
+    processor.measureProcess();
+    processor = new MultiThreadedWithReduction();
+    processor.measureProcess();
+    processor = new MultiThreadedWithForkJoin();
     processor.measureProcess();
   }
 
